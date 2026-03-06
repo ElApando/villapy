@@ -1,0 +1,31 @@
+[project]
+name = "villapy"
+version = "0.0.0"
+description = "Utilities for data engineering workflows"
+authors = [{name="Juan Villalpando"}]
+
+dependencies = [
+    "pandas>=2.2",
+    "SQLAlchemy>=2.0",
+    "python-dotenv>=1.1"
+]
+
+[project.optional-dependencies]
+
+mysql = [
+    "PyMySQL>=1.1"
+]
+
+sqlserver = [
+    "pyodbc>=5.2"
+]
+
+google = [
+    "google-auth-oauthlib>=1.2",
+    "google-api-python-client>=2.187",
+    "google-cloud-secret-manager>=2.24"
+]
+
+excel = [
+    "openpyxl>=3.1"
+]
