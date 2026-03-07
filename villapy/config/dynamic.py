@@ -1,7 +1,7 @@
 
-""" DOC """
+""" Configuración Dinamica del Proyecto """
 
-from static import di_config
+from villapy.config.static import di_config
 
 def config_base_path(base_path:str):
     """ Configuración del Path """

@@ -6,7 +6,7 @@ import shutil
 from pathlib import Path
 from typing import Dict
 
-from looging.write_log import WriteLogs
+from villapy.looging.write_log import WriteLogs
 
 class OpenFiles:
     """ OpenFiles """

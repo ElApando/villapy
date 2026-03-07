@@ -9,7 +9,7 @@ class TextManage:
     def __init__(self) -> None:
         """ TextManage """
         return
-    
+
     def string_check(self, st_word:str)->str:
         """ String_Check
 
@@ -53,7 +53,7 @@ class TextManage:
         """
         st_file_name = re.sub(r'[<>:"/\\|?*]',"", st_file_name)
         return st_file_name
-    
+
     def save_numbers(self, st_number:str)->str:
         """ Salvación de números
 
@@ -72,8 +72,8 @@ class TextManage:
             st_number = re.findall(r"\d+\.\d+", st_number)[0]
 
         return st_number
-    
-    def modify_date(self, st_date:str):
+
+    def modify_date(self, st_date:str)->str|None:
         """ Modificación de fecha
 
         Se da formato a las fechas mal formadas 
@@ -92,6 +92,9 @@ class TextManage:
 
         if len(ls_one) == 1:
             ls_one = st_date.split("-")
+
+        if ls_one[0] in ["", None, "None"]:
+            return None
 
         if ls_one[1].isalpha():
             ls_one[1] = di_months[(ls_one[1]).lower()]
@@ -115,5 +118,5 @@ class TextManage:
         st_date = "-".join(ls_one)
 
         return st_date
-    
+
 # Finite Incantatem
