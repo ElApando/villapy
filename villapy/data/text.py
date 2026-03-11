@@ -10,7 +10,7 @@ class TextManage:
         """ TextManage """
         return
 
-    def string_check(self, st_word:str)->str:
+    def string_check(self, st_word:str)->str: # Será eliminada
         """ String_Check
 
         Revisión de que la palabra sea una cadena de texto
@@ -51,13 +51,14 @@ class TextManage:
         Returns:
             st_file_name (str): Nombre sin caracteres raros
         """
-        st_file_name = re.sub(r'[<>:"/\\|?*]',"", st_file_name)
+        st_file_name = re.sub(pattern='[<>:"/\\|?*´%!@$&()=¿123456789]', repl="",
+                               string = st_file_name)
         return st_file_name
 
     def save_numbers(self, st_number:str)->str:
         """ Salvación de números
 
-        Se recatan los numeros de las fechas que se encuentran mal formados
+        Se recatan los numeros de los precios que estan mal formados, no aceptan fechas
 
         Parameters:
             st_number (str): Cadena de texto a evaluar
@@ -66,10 +67,11 @@ class TextManage:
             st_number (str): Número encontrado
         """
         st_number = str(st_number)
-        ls_pattern = re.findall(r"\d+\.\d+", st_number)
+        ls_pattern = re.findall(pattern = r"-?\d+\.\d+", string = st_number)
+        print(ls_pattern)
 
         if ls_pattern:
-            st_number = re.findall(r"\d+\.\d+", st_number)[0]
+            st_number = re.findall(r"-?\d+\.\d+", st_number)[0]
 
         return st_number
 
@@ -92,6 +94,9 @@ class TextManage:
 
         if len(ls_one) == 1:
             ls_one = st_date.split("-")
+
+        if len(ls_one) == 1:
+            ls_one = st_date.split(".")
 
         if ls_one[0] in ["", None, "None"]:
             return None

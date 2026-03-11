@@ -23,7 +23,7 @@ from villapy.database.connection import Connection
 class QuerysDB:
     """Clase peticiones a SQL con SQLAlchemy ORM"""
 
-    def __init__(self, di_connection:Dict[str, str])->None:
+    def __init__(self, di_connection:Dict[str, str], bo_test: bool = False)->None:
         """ Inicio de la clase
 
         Se hace la conexión con la base de datos, también la clase contiene diferentes peticiones 
@@ -37,7 +37,7 @@ class QuerysDB:
         - Modificación del formato de las columnas
         - Nombre de las tablas ubicadas en la base de datos  
         """
-        active_connection = Connection(di_connection)
+        active_connection = Connection(di_connection, bo_test)
         du_both = active_connection.connect_session()
         self.session = du_both[0]
         self.engines = du_both[1]
@@ -81,7 +81,7 @@ class QuerysDB:
 
         return model
 
-    def database_tbl_create(self, model:str|Type[DeclarativeBase], 
+    def database_tbl_create(self, model:str|Type[DeclarativeBase],
                             function:Callable[...,Type[DeclarativeBase]]|None=None)->None:
         """ Creación de la base de datos
 
@@ -142,8 +142,8 @@ class QuerysDB:
 
         return df_data
 
-    def database_data_delete(self,  model:str|Type[DeclarativeBase], st_date_current: str,
-                             st_brand_name: str,
+    def database_data_delete(self,  model:str|Type[DeclarativeBase],
+                             st_date_current: str|date, st_brand_name: str,
                              function:Callable[...,Type[DeclarativeBase]]|None=None)->None:
         """ Eliminación renglones 
 
@@ -165,8 +165,8 @@ class QuerysDB:
         self.session.execute(qu_delete)
         self._safe_commit()
 
-    def database_data_delete_v2(self, model:str|Type[DeclarativeBase], st_date_current: str,
-                                st_brand_name: str, st_column: str,
+    def database_data_delete_v2(self, model:str|Type[DeclarativeBase],
+                                st_date_current: str, st_brand_name: str, st_column: str,
                                 function:Callable[...,Type[DeclarativeBase]]|None=None)->None:
         """ Eliminación renglones 
 
@@ -222,7 +222,8 @@ class QuerysDB:
                         # write_logs(self.st_log,
                         #            f"🔧 Modificando '{st_column_name}' en tabla: {table_name}")
                         conn.execute(
-                        text(f"ALTER TABLE `{table_name}` MODIFY COLUMN `{st_column_name}` VARCHAR(255);")
+                        text(
+                      f"ALTER TABLE `{table_name}` MODIFY COLUMN `{st_column_name}` VARCHAR(255);")
                 )
 
     def database_name_tables(self)->List[str]:

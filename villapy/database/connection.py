@@ -20,13 +20,14 @@ class Connection:
     Docstring for Connection
     """
 
-    def __init__(self, di_conections: Dict[str, str]) -> None:
+    def __init__(self, di_conections: Dict[str, str], bo_test: bool = False) -> None:
         """
         Docstring for __init__
         """
         self.st_user_db = di_conections["username"]
         self.st_pass_db = di_conections["password"]
         self.st_serv_db = di_conections["server"]
+        self.bo_test = bo_test
 
     def get_connection(self) -> "Engine":
         """ Creación de la conexión con la base de datos
@@ -51,7 +52,7 @@ class Connection:
         if not connection_string:
             raise ValueError("La variable de entorno CONNECTION_STRING no está configurada.")
 
-        connection = create_engine(connection_string)
+        connection = create_engine("sqlite:///:memory:") if self.bo_test else create_engine(connection_string)
 
         return connection
 

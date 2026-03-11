@@ -1,22 +1,3 @@
-import pandas as pd
-from villapy.data.dataframe import ManageTable
+from datetime import datetime
 
-activate = ManageTable()
-
-df_data = pd.DataFrame({"fecha": 
-                        ["2025-10-22", "2025/10/22", "2025-22-10", "10-22-2025", "", ],
-                        "hora": ["10:12", "10:w2:00", "10:12:", "1:12:00", "", ],
-                        "nombre": ["juan", "roberto", "claudio", "!211124", "", ],
-                        "apellido": ["gonzalez", "fernadez", "carmen", "cebolla","", ],
-                        "edad": ["12", "2.5", "3e", 59.6, "", ],
-                        "cantidad": ["12.456", 23.345, "123r.", 56, "", ]})
-
-df_data = activate.format_column(df_data, ["fecha"], "date")
-df_data = activate.format_column(df_data, ["hora"], "time")
-df_data = activate.format_column(df_data, ["nombre", "apellido"], "str")
-df_data = activate.format_column(df_data, ["edad"], "int")
-df_data = activate.format_column(df_data, ["cantidad"], "float")
-
-
-print(df_data)
-print(str(df_data["hora"][0]))
+print(datetime.strptime("10/03/2026", "%d/%m/%Y").date())

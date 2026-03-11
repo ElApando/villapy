@@ -7,7 +7,7 @@ from typing import Callable
 import time
 import traceback
 
-from looging.write_log import WriteLogs
+from villapy.looging.write_log import WriteLogs
 
 class ManageFunctios:
     """ DOC """

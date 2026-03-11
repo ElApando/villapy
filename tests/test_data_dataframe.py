@@ -1,4 +1,9 @@
-""" Prueba Unitaria de Tablas Pandas"""
+""" Prueba Unitaria de Tablas Pandas
+
+CPH:
+
+Limpieza de nombre y apellidos sin Numeros ni caracteres extraños 
+"""
 
 # pyright: reportUnusedImport=false
 
