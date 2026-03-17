@@ -5,8 +5,8 @@ Docstring for database.sqlite
 from pathlib import Path
 from typing import Dict, List
 
-import pandas as pd
 import sqlite3
+import pandas as pd
 
 class MangeSqlite:
     """ DOC """

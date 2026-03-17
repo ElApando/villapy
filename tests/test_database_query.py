@@ -24,54 +24,49 @@ class Base(DeclarativeBase):
 
 
 class ModelDataBaseTable(Base):
-    """ DOC """
+    """ Módelo de prueba """
     __tablename__ = "test_table"
-
     id: Mapped[int] = mapped_column(primary_key=True)
     date: Mapped[date]
     brand: Mapped[str]
 
 
 class TestDataBase:
-    """ DOC """
+    """ Prueba Unitaria de la Base de Datos """
 
     @pytest.fixture
     def db(self):
-        """Fixture de base de datos para pruebas"""
+        """Fixture conexión a la base de datos de pruebas"""
         from villapy.database.query import QuerysDB
-
         active_db = QuerysDB(
             {"username": "", "password": "", "server": ""}, True)
-
         return active_db
 
     @pytest.fixture
     def df_upload(self):
-        """Fixture de base de datos para pruebas"""
+        """Dataframe 1 de pruebas"""
         df_data = pd.DataFrame({"id": [1,2,3,4,5,6],
-                                "date": ["10/03/2026", "10/03/2026", "10/03/2026", 
+                                "date": ["10/03/2026", "10/03/2026", "10/03/2026",
                                          "10/03/2026", "10/03/2026", "11/03/2026"],
                                 "brand": ["a", "b", "c", "d", "e", "g"]})
         return df_data
 
     @pytest.fixture
     def df_append(self):
-        """Fixture de base de datos para pruebas"""
+        """Dataframe 2 de pruebas"""
         df_data = pd.DataFrame({"id": [6],
                                 "date": ["2026-10-03"],
                                 "brand": ["f"]})
         return df_data
 
     def test_create(self, db):
-        """ DOC """
-
+        """ Prueba Uniataria Creación de una tabla """
         db.database_tbl_create(model=ModelDataBaseTable)
         ls_tables = db.database_name_tables()
-
         assert "test_table" in ls_tables
 
     def test_upload_select(self, db, df_upload):
-        """ DOC """
+        """ Prueba Unitaria de Actualización y Selección de datos """
 
         db.database_df_upload(model=ModelDataBaseTable, df_data = df_upload)
         df_data = db.database_df_select(st_name_table = "test_table")
@@ -80,7 +75,7 @@ class TestDataBase:
         assert df_data["brand"][0] == "a"
 
     def test_append_select(self, db, df_append):
-        """ DOC """
+        """ Agregación de un registro a una tabla"""
 
         db.database_df_append(model=ModelDataBaseTable, df_data = df_append)
         df_data = db.database_df_select(st_name_table = "test_table")
@@ -89,7 +84,7 @@ class TestDataBase:
         assert df_data["brand"][0] == "f"
 
     def test_delete_v1(self, db, df_upload):
-        """ DOC """
+        """ Eliminación de registros tipo 1  """
         da_date = pd.to_datetime("10/03/2026", format  ="%d/%m/%Y").date()
         df_upload["date"] = pd.to_datetime(df_upload["date"], format="%d/%m/%Y").dt.date
         db.database_df_append(model=ModelDataBaseTable, df_data = df_upload)
@@ -100,7 +95,7 @@ class TestDataBase:
         assert not "b" in df_data["date"].values
 
     def test_delete_v2(self, db, df_upload):
-        """ DOC """
+        """ Eliminación de registros tipo 2 """
         da_date = pd.to_datetime("10/03/2026", format  ="%d/%m/%Y").date()
         df_upload["date"] = pd.to_datetime(df_upload["date"], format="%d/%m/%Y").dt.date
         db.database_df_append(model=ModelDataBaseTable, df_data = df_upload)
@@ -111,7 +106,7 @@ class TestDataBase:
         assert not "b" in df_data["date"].values
 
     def test_delete_v3(self, db, df_upload):
-        """ DOC """
+        """ Eliminación de registros tipo 3 """
         da_date = pd.to_datetime("10/03/2026", format  ="%d/%m/%Y").date()
         df_upload["date"] = pd.to_datetime(df_upload["date"], format="%d/%m/%Y").dt.date
         db.database_df_append(model=ModelDataBaseTable, df_data = df_upload)

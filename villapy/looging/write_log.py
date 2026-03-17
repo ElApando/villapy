@@ -15,7 +15,7 @@ class WriteLogs:
         """
         Docstring for __init__
         """
-        self.st_origin_path = di_config["origing_path"]
+        self.st_origin_path = di_config["base_path"]
 
     # def check_path(str):
 
@@ -29,8 +29,7 @@ class WriteLogs:
             - None
         """
         st_name = st_name_rate.lower()
-
-        with open(f"{self.st_origin_path}logs/logs_{st_name}.txt","a",encoding="utf-8") as file:
+        with open(f"{self.st_origin_path}/logs/logs_{st_name}.txt","a",encoding="utf-8") as file:
             st_time = str(datetime.datetime.now())
             file.write(f"\n{st_time} {st_text}")
 

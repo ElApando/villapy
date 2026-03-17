@@ -8,7 +8,7 @@ Este programa se hará como una herramienta extra
 import os
 from typing import List
 
-class ManageFolder:
+class Mapper:
     """ DOC """
 
     def __init__(self, st_path: str = "", st_env: str|None = None,

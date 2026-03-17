@@ -2,7 +2,7 @@
 
 # pylint: disable=broad-exception-caught
 
-from typing import Callable
+from typing import Callable, Any
 
 import time
 import traceback
@@ -20,7 +20,7 @@ class ManageFunctios:
         self.logs_activate = WriteLogs()
 
     def retry_function(self, function: Callable[..., None], st_site: str,
-                       *args, **kwargs) -> None: # type: ignore
+                       *args, **kwargs) -> Any: # type: ignore
         """ retry_function
          
         Reintenta la función ingresada con la finalidad de que cumpla con lo enconmendado
@@ -46,7 +46,9 @@ class ManageFunctios:
 
                 else:
                     self.logs_activate.logs_with_name(st_site, f"Maximo intentos {e}")
-                    raise
+                    raise TimeoutError("Se terminaron los intentos")
+
+                return "fail"
 
     def _run_stage(self, st_name_process: str, fu_function: Callable[..., None]) -> None:
         """ Run Stage
@@ -70,6 +72,6 @@ class ManageFunctios:
 
         except Exception as e:
             self.logs_activate.write_logs(f"[FALLO] - {st_name_process} - Error {e}")
-            raise
+            raise  TimeoutError("Fallo el proceso")
 
 # Finite Incantatem

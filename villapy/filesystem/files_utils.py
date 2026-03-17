@@ -68,7 +68,7 @@ class ManageFile:
 
         else:
             raise KeyError("Esa Opción no existe en el método")
-    
+
     def check_path(self, pa_path:Path)->None:
         """ Revisión de rutas
 
@@ -85,7 +85,7 @@ class ManageFile:
         if not os.path.exists(pa_path):
             os.makedirs(pa_path, exist_ok=True)
 
-    
+
     def _validate_path(self, pa_path:Path)->bool:
         """  _validate_path
 
@@ -104,7 +104,7 @@ class ManageFile:
         except Exception as e:
             self.logs_activate.write_logs(f"{e}")
             return False
-        
+
     def separator_table(self, pa_path:Path)->str:
         """ separator_table
 
@@ -126,7 +126,7 @@ class ManageFile:
         st_separator = self._separator_what(content)
 
         return st_separator
-    
+
     def _separator_what(self, st_word:str)->str:
         """ separator_what
 
