@@ -1,11 +1,11 @@
 [project]
 name = "villapy"
-version = "0.0.0"
+version = "1.0.2"
 description = "Utilities for data engineering workflows"
 authors = [{name="Juan Villalpando"}]
 
 dependencies = [
-    "pandas==2.2",
+    "pandas==3.0",
     "SQLAlchemy==2.0",
     "python-dotenv==1.1",
     "numpy==2.4.1"
