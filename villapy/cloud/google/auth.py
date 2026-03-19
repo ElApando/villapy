@@ -2,16 +2,15 @@
 DOCT
 """
 
+# pylint: disable=no-meber
+
 from typing import Any, Dict, List
 
 from google.oauth2.credentials import Credentials # type: ignore
 from googleapiclient.discovery import build # type: ignore
-from googleapiclient.http import MediaFileUpload # type: ignore
-from googleapiclient.errors import HttpError # type: ignore
 from google_auth_oauthlib.flow import InstalledAppFlow # type: ignore
 
 from villapy.looging.write_log import WriteLogs
-
 
 class GoogleAuth:
     """ Herramientas de Google que son de gran utilidad """
@@ -95,5 +94,7 @@ class GoogleAuth:
         service = build("drive", "v3", credentials=creds) # type: ignore
         about = service.about().get(fields="user").execute() # type: ignore
 
-        st_text = str("Cuenta del token:", about.get("user", {}).get("emailAddress")) # type:ignore
+        st_text = "Cuenta del token:", about.get("user", {}).get("emailAddress") # type:ignore
         self._logs(st_text)
+
+# Finite Incantatem

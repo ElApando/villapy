@@ -10,7 +10,6 @@ from google.oauth2.credentials import Credentials # type: ignore
 from googleapiclient.discovery import build # type: ignore
 from googleapiclient.http import MediaFileUpload # type: ignore
 from googleapiclient.errors import HttpError # type: ignore
-from google_auth_oauthlib.flow import InstalledAppFlow # type: ignore
 
 from villapy.looging.write_log import WriteLogs
 
@@ -29,9 +28,11 @@ class GoogleTools:
                 - Revisar si estos están activos.
         """
         self.ac_write = WriteLogs()
-        self.st_route_token = di_routes["token"]
+        
         self.ls_drive = di_scope["scope"]["drive"]
         self.st_folder_id = di_scope["folder_id"]["prd"]
+
+        self.st_route_token = di_routes["token"]
         self.st_route_file = di_routes["file_prd"]
         self.st_name_file = di_routes["name_file"]
 
