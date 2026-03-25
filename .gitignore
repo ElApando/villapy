@@ -3,3 +3,4 @@
 **.vscode**
 cph.py
 .pytest_cache
+*.egg-info/

@@ -53,7 +53,7 @@ class TestMapper:
         logs_dir = tmp_path / "logs"
         logs_dir.mkdir(parents=True, exist_ok=True)
         active = ManageFunctios()
-        active._run_stage(st_name_process="prueba", fu_function=self.function_prove_2)
+        active.run_stage(st_name_process="prueba", fu_function=self.function_prove_2)
         captured = capsys.readouterr()
 
         assert not "Fallo el proceso" in captured.out

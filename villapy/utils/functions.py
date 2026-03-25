@@ -9,11 +9,18 @@ import traceback
 
 from villapy.looging.write_log import WriteLogs
 
-class ManageFunctios:
-    """ DOC """
+class ManageFunctions:
+    """ Manejo de Funciones """
 
     def __init__(self) -> None:
-        """ DOC """
+        """ Manejo de Funciones 
+        
+        Se pueden modificar el tiempo de espera y los intentos máximos.
+        
+        Las funciones que se manejan son :
+        - retry_function
+        - run_satge
+        """
 
         self.in_wait_retry = 5
         self.in_max_retry = 3
@@ -50,7 +57,7 @@ class ManageFunctios:
 
                 return "fail"
 
-    def _run_stage(self, st_name_process: str, fu_function: Callable[..., None]) -> None:
+    def run_stage(self, st_name_process: str, fu_function: Callable[..., None]) -> None: # No puede ser importado con _
         """ Run Stage
         
         La función registra la actividad de las funciones que se ejecutan. Registra tiempo de
