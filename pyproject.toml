@@ -1,6 +1,6 @@
 [project]
 name = "villapy"
-version = "1.0.3"
+version = "1.0.4"
 description = "Utilities for data engineering workflows"
 authors = [{name="Juan Villalpando"}]
 
@@ -10,6 +10,10 @@ dependencies = [
     "python-dotenv==1.1",
     "numpy==2.4.1"
 ]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["villapy_lib*"]
 
 [tool.setuptools]
 packages = ["villapy"]
