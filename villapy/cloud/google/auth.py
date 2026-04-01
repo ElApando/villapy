@@ -1,21 +1,27 @@
 """
-DOCT
+Scirpt con el objetivo de realizar la creación y actualización de credenciales
+para poder trabajr con la nube
 """
 
-# pylint: disable=no-meber
+# pyright: reportArgumentType = false
+# pyright: reportUnknownMemberType = false
+# pyright: reportUnknownVariableType = false
+# pyright: reportMissingTypeStubs = false
+
+# pylint: disable=no-member
 
 from typing import Any, Dict, List
 
-from google.oauth2.credentials import Credentials # type: ignore
-from googleapiclient.discovery import build # type: ignore
-from google_auth_oauthlib.flow import InstalledAppFlow # type: ignore
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+from google_auth_oauthlib.flow import InstalledAppFlow
 
 from villapy.looging.write_log import WriteLogs
 
 class GoogleAuth:
     """ Herramientas de Google que son de gran utilidad """
 
-    def __init__(self, di_scope: Dict[str, Any], di_routes: Dict[str,str], 
+    def __init__(self, ls_scope: List[str], di_routes: Dict[str,str],
                  di_logs: Dict[str, Any])->None:
         """ Herramientas google
 
@@ -29,7 +35,7 @@ class GoogleAuth:
         self.ac_write = WriteLogs()
         self.st_route_client = di_routes["client"]
         self.st_route_token = di_routes["token"]
-        self.ls_drive = di_scope["scope"]["drive"]
+        self.ls_scope = ls_scope
 
         self.bo_type = di_logs["type"]
         self.bo_model = di_logs["mode_file"]
@@ -45,7 +51,7 @@ class GoogleAuth:
                 self.ac_write.write_logs(st_text)
 
     def drive_create_token(self, st_route_client:str = "", st_route_token:str = "",
-                     ls_scope: str = "")->None:
+                     ls_scope: List[str] | None = None)->None:
         """ Crecaión del Token Google
 
         La función crea un token de seguridad, con google, no se requiere ingresar repetidas veces
@@ -60,13 +66,13 @@ class GoogleAuth:
         """
         st_route_client =st_route_client or self.st_route_client
         st_route_token = st_route_token or self.st_route_token
-        ls_scope = ls_scope or self.ls_drive
+        ls_scope = ls_scope or self.ls_scope
 
-        flow = InstalledAppFlow.from_client_secrets_file(st_route_client, ls_scope) # type: ignore
-        creds = flow.run_local_server(port=0) # type: ignore
+        flow = InstalledAppFlow.from_client_secrets_file(st_route_client, ls_scope)
+        creds = flow.run_local_server(port=0)
 
         with open(st_route_token, 'w', encoding="utf-8") as file:
-            file.write(creds.to_json()) # type: ignore
+            file.write(creds.to_json())
 
         st_text = f"token.json creado con éxito, en la siguiente ruta {st_route_token}"
         print(st_text)
@@ -86,15 +92,13 @@ class GoogleAuth:
             - None -
         """
         st_route_token = st_route_token or self.st_route_token
-        ls_scope = ls_scope or self.ls_drive
+        ls_scope = ls_scope or self.ls_scope
 
-        print(st_route_token,ls_scope)
+        creds = Credentials.from_authorized_user_file(st_route_token, ls_scope)
+        service = build("drive", "v3", credentials=creds)
+        about = service.about().get(fields="user").execute()
 
-        creds = Credentials.from_authorized_user_file(st_route_token, ls_scope) # type: ignore
-        service = build("drive", "v3", credentials=creds) # type: ignore
-        about = service.about().get(fields="user").execute() # type: ignore
-
-        st_text = "Cuenta del token:", about.get("user", {}).get("emailAddress") # type:ignore
+        st_text = "Cuenta del token:", about.get("user", {}).get("emailAddress")
         self._logs(st_text)
 
 # Finite Incantatem

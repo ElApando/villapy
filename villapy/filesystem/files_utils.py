@@ -4,7 +4,7 @@ import os
 import json
 import shutil
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Any
 
 from villapy.looging.write_log import WriteLogs
 
@@ -33,6 +33,20 @@ class OpenFiles:
             di_json = json.load(file)
 
         return di_json
+
+    def write_json(self, st_route_json:str, di_data:Dict[Any, Any]) -> None: # Falta Prueba unitaria
+        """ Guardar un diccionario en formato JSON
+
+        Guarda diccionarios y los guarda como json
+
+        Parameters:
+            st_route_dict (str): Ruta en la que s localiza el json
+
+        Returns:
+            di_json (dict): Json convertido en diccionario
+        """
+        with open(st_route_json, "w", encoding = "utf-8") as dictionary:
+            json.dump(di_data, dictionary, indent = 4, ensure_ascii = False)
 
 
 class ManageFile:
