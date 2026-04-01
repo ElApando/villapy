@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from villapy.cloud.google.drive import GoogleTools
+from villapy_lib.cloud.google.drive import GoogleTools
 
 class TestGoogleDrive:
     """ Prueba Uniatria de registro """

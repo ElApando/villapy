@@ -18,7 +18,7 @@ from sqlalchemy import text, inspect, delete, select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import DeclarativeBase
 
-from villapy.database.connection import Connection
+from villapy_lib.database.connection import Connection
 
 class QuerysDB:
     """Clase peticiones a SQL con SQLAlchemy ORM"""

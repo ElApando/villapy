@@ -13,8 +13,8 @@
 
 from pathlib import Path
 
-from villapy.utils.functions import ManageFunctios
-from villapy.config.dynamic import config_base_path
+from villapy_lib.utils.functions import ManageFunctios
+from villapy_lib.config.dynamic import config_base_path
 
 class TestMapper:
     """ Prueba Uniataria Mapeador """

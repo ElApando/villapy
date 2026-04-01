@@ -16,7 +16,7 @@ class TestSQLite:
         """Prueba Unitaria de la extracción de tablas de SQLite"""
         pytest.importorskip("pandas")
 
-        from villapy.database.sqlite import MangeSqlite
+        from villapy_lib.database.sqlite import MangeSqlite
 
         db_path = tmp_path / "sample.db"
         conn = sqlite3.connect(db_path)

@@ -6,8 +6,8 @@
 import json
 from pathlib import Path
 
-from villapy.filesystem.files_utils import OpenFiles, ManageFile
-from villapy.config.dynamic import config_base_path
+from villapy_lib.filesystem.files_utils import OpenFiles, ManageFile
+from villapy_lib.config.dynamic import config_base_path
 
 class TestManageFile:
     """ Prueba Uniatria Manejo de Archivos """

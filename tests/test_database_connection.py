@@ -11,7 +11,7 @@ class TestDataBaseConnection:
         """ Prueba Unitaria Creación de Conexión
         """
 
-        from villapy.database.connection import Connection
+        from villapy_lib.database.connection import Connection
         from sqlalchemy.engine import Engine
         from sqlalchemy.orm import Session
 

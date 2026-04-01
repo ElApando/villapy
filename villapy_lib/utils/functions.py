@@ -7,7 +7,7 @@ from typing import Callable, Any
 import time
 import traceback
 
-from villapy.looging.write_log import WriteLogs
+from villapy_lib.looging.write_log import WriteLogs
 
 class ManageFunctions:
     """ Manejo de Funciones """

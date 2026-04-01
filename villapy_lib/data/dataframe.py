@@ -4,7 +4,7 @@ Docstring for data.dataframe
 
 import pandas as pd
 
-from villapy.data.text import TextManage
+from villapy_lib.data.text import TextManage
 
 class ManageTable:
     """ Manejo de Tablas DataFrame """

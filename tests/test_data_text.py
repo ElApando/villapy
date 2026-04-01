@@ -7,7 +7,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from villapy.data.text import TextManage
+from villapy_lib.data.text import TextManage
 
 class TestDataText:
     """DCO"""

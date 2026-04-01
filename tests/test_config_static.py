@@ -10,12 +10,12 @@ class TestConfigStatic:
 
     def test_imports(self):
         """ Prueba Unitaria Importación de Módulo - Configuración"""
-        import villapy.config
-        import villapy.config.static
+        import villapy_lib.config
+        import villapy_lib.config.static
 
     def test_config_di_config(self):
         """ Prueba Unitaria de la función config_base_path"""
-        from villapy.config.static import di_config
+        from villapy_lib.config.static import di_config
 
         assert isinstance(di_config, dict)
         assert "base_path" in  di_config

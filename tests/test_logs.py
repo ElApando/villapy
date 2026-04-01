@@ -7,8 +7,8 @@
 import datetime
 from pathlib import Path
 
-from villapy.looging.write_log import WriteLogs 
-from villapy.config.dynamic import config_base_path
+from villapy_lib.looging.write_log import WriteLogs 
+from villapy_lib.config.dynamic import config_base_path
 
 class TestLog:
     """ Prueba Uniatria de registro """

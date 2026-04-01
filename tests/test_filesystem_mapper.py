@@ -6,7 +6,7 @@
 # pyright: reportUnknownMemberType=false
 # pylint: disable=protected-access
 
-from villapy.filesystem.mapper import Mapper
+from villapy_lib.filesystem.mapper import Mapper
 
 class TestMapper:
     """ Prueba Uniataria Mapeador """

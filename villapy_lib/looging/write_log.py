@@ -4,7 +4,7 @@ Docstring for looging.looging
 
 import datetime
 
-from villapy.config.static import di_config
+from villapy_lib.config.static import di_config
 
 class WriteLogs:
     """

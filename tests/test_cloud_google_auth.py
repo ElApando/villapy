@@ -14,7 +14,7 @@ from unittest.mock import Mock, patch
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
-from villapy.cloud.google.auth import GoogleAuth
+from villapy_lib.cloud.google.auth import GoogleAuth
 
 def test_drive_create_token(tmp_path: Path):
     """Doct"""

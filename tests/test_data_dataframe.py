@@ -15,13 +15,13 @@ class TestDataDataFrame:
 
     def test_imports(self):
         """ Prueba Unitaria Importación de Módulo - Configuración"""
-        import villapy.data
-        import villapy.data.dataframe
+        import villapy_lib.data
+        import villapy_lib.data.dataframe
 
     def test_format_column(self):
         """ Prueba Unitaria de la función config_base_path"""
         import pandas as pd
-        from villapy.data.dataframe import ManageTable
+        from villapy_lib.data.dataframe import ManageTable
 
         activate = ManageTable()
 

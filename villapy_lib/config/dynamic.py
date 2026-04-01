@@ -3,7 +3,7 @@
 
 from pathlib import Path
 
-from villapy.config.static import di_config
+from villapy_lib.config.static import di_config
 
 def config_base_path(base_path:Path):
     """ Configuración del Path """
