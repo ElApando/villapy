@@ -2,7 +2,7 @@
 
 # pylint: disable=no-member
 
-from typing import Dict, Any
+from typing import Dict, List
 
 import base64
 from email.mime.text import MIMEText
@@ -13,7 +13,7 @@ from googleapiclient.discovery import build # type: ignore
 class Gmail:
     """ DOC """
 
-    def __init__(self, di_routes: Dict[str, str], di_scope: Dict[str, Any]) -> None:
+    def __init__(self, di_routes: Dict[str, str], di_scope: Dict[str, List[str]]) -> None:
         """ DCO """
 
         self.creds = Credentials.from_authorized_user_file(di_routes["token"], di_scope["email"]) # type: ignore
