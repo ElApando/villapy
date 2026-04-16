@@ -1,7 +1,14 @@
-""" DOC """
+""" Limpieza de datos
+
+El script contiene todo lo correspondiente a las cadenas de texto
+"""
 
 import re
+
 import unicodedata
+from typing import Dict
+
+import bcrypt
 
 class TextManage:
     """ TextManage """
@@ -10,7 +17,7 @@ class TextManage:
         """ TextManage """
         return
 
-    def string_check(self, st_word:str)->str: # Será eliminada
+    def string_check(self, st_word:str)->str:
         """ String_Check
 
         Revisión de que la palabra sea una cadena de texto
@@ -68,7 +75,6 @@ class TextManage:
         """
         st_number = str(st_number)
         ls_pattern = re.findall(pattern = r"-?\d+\.\d+", string = st_number)
-        print(ls_pattern)
 
         if ls_pattern:
             st_number = re.findall(r"-?\d+\.\d+", st_number)[0]
@@ -123,5 +129,73 @@ class TextManage:
         st_date = "-".join(ls_one)
 
         return st_date
+
+    def valid_name(self, st_name:str)->bool:
+        """ Validación de Nombres 
+
+        Solo se aceptan letras y acentos, devuelve un booleano
+
+        Parameters:
+            st_name (str): Palabra que será evaluada
+        Returns:
+            bool (bool): True si el nombre es válido, False en caso contrario
+        """
+        return bool(re.match(r"^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$", st_name))
+
+    def valid_email(self, st_email:str)->bool:
+        """ Validación de Correos
+
+       Corrobora que el correo sea correcto en formato y configuración
+
+        Parameters:
+            st_email (str): Correo que será evaluado
+        Returns:
+            bool (bool): True si el correo es válido, False en caso contrario
+        """
+        if st_email.startswith(".") or st_email.endswith("."):
+            return False
+
+        if ".." in st_email:
+            return False
+
+        return bool(re.match( r'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$', st_email))
+
+    def valid_phone(self, st_phone:str)->bool:
+        """ Validación de Teléfono
+
+       Corrobora que el teléfono sea correcto en estuctura y secuencia
+
+        Parameters:
+            st_phone (str): teléfono que será evaluado
+        Returns:
+            bool (bool): True si el teléfono es válido, False en caso contrario
+        """
+        return bool(re.match( r'^[2-9]\d{9}$', st_phone)) and len(st_phone) == 10
+
+    def change_word(self, st_word:str, di_changes: Dict[str, str])->str:
+        """ Cambio de Palabras
+
+        Toma el diccionario que proporciona el usuario y cambia las palabras dentro del texto
+
+        Parameters:
+            st_word (str): Texto que será modificado
+            di_changes (dict): Diccionario con las palabras que serán cambiadas y las nuevas 
+        Returns:
+           st_word (str): Devuelve el texto con las palabras adecuadas
+        """
+        for key, item in di_changes.items():
+            st_word = st_word.replace(key, item)
+        return st_word
+
+    def hash_password(self, st_password:str)->str:
+        """ Codificación de la contraseña
+
+        Se codifica la contraseña por seguridad
+
+        Return:
+            hash (str): contraseña codificada 
+        """
+        st_hashed =bcrypt.hashpw(st_password.encode(), bcrypt.gensalt())
+        return st_hashed.decode()
 
 # Finite Incantatem

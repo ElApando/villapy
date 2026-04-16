@@ -11,7 +11,6 @@ from pathlib import Path
 
 from unittest.mock import Mock, patch
 
-
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from villapy_lib.cloud.google.auth import GoogleAuth
@@ -28,11 +27,11 @@ def test_drive_create_token(tmp_path: Path):
     fake_flow = Mock()
     fake_flow.run_local_server.return_value = fake_creds
 
-    with patch("villapy.cloud.google.auth.InstalledAppFlow") as mock_flow:
+    with patch("villapy_lib.cloud.google.auth.InstalledAppFlow") as mock_flow:
 
         mock_flow.from_client_secrets_file.return_value = fake_flow
 
-        g = GoogleAuth(di_scope={"scope": {"drive" : ["scope"]}},
+        g = GoogleAuth(ls_scope=["scope"],
                    di_routes={"client": str(client_file),
                               "token": str(token_file)},
                    di_logs={"type": False, "mode_file": False, "word": ""})
@@ -52,12 +51,12 @@ def test_drive_check_token(tmp_path: Path):
         "user": {"emailAddress": "test@gmail.com"}
     }
 
-    with  patch("villapy.cloud.google.auth.Credentials") as mock_creds, \
-          patch("villapy.cloud.google.auth.build") as mock_build:
+    with  patch("villapy_lib.cloud.google.auth.Credentials") as mock_creds, \
+          patch("villapy_lib.cloud.google.auth.build") as mock_build:
 
         mock_build.return_value = fake_service
 
-        g = GoogleAuth(di_scope={"scope": {"drive" : ["scope"]}},
+        g = GoogleAuth(ls_scope=["scope"],
                         di_routes={"client": "client.json",
                                     "token": str(token_file)},
                         di_logs={"type": False, "mode_file": False, "word": ""})

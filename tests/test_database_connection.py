@@ -15,7 +15,8 @@ class TestDataBaseConnection:
         from sqlalchemy.engine import Engine
         from sqlalchemy.orm import Session
 
-        active = Connection({"username": "user", "password":"pass", "server": "server"})
+        active = Connection({"username": "user", "password": "pass", "server": "server",
+                             "database": "database", "drive": "drive"}, True)
         session = active.connect_session()
 
         assert isinstance(session[0], Session)

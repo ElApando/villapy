@@ -38,8 +38,8 @@ class TestDataBase:
     def db(self):
         """Fixture conexión a la base de datos de pruebas"""
         from villapy_lib.database.query import QuerysDB
-        active_db = QuerysDB(
-            {"username": "", "password": "", "server": ""}, True)
+        active_db = QuerysDB({"username": "user", "password": "pass", "server": "server",
+                              "database": "database", "drive": "drive"}, True)
         return active_db
 
     @pytest.fixture

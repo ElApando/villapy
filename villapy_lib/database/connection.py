@@ -16,17 +16,19 @@ if TYPE_CHECKING:
     from sqlalchemy.orm import Session
 
 class Connection:
-    """
-    Docstring for Connection
-    """
+    """ Connection Data Base """
 
-    def __init__(self, di_conections: Dict[str, str], bo_test: bool = False) -> None:
-        """
-        Docstring for __init__
+    def __init__(self, di_conections: Dict[str, str | None], bo_test: bool = False) -> None:
+        """ Conexión a la base de datos
+
+        La clase realiza la comunicación del programa a la base dedatos mediante sqlalchemy 
+        establece la conexión y la session con la cual se comunica los datos
         """
         self.st_user_db = di_conections["username"]
         self.st_pass_db = di_conections["password"]
         self.st_serv_db = di_conections["server"]
+        self.st_data_db = di_conections["database"]
+        self.st_driv_db = di_conections["drive"]
         self.bo_test = bo_test
 
     def get_connection(self) -> "Engine":
@@ -37,22 +39,23 @@ class Connection:
         que el driver se bifurca debido a que es diferente para la plataforma que se utilice
 
         Returns:
-            - connection *(engie)* - Conexión a la base de datos
+            connection (engie): Conexión a la base de datos
         """
         params: Dict[str, Any] = {
                 'username' : self.st_user_db,
                 'password' : self.st_pass_db,
                 'server' : self.st_serv_db,
-                'database' : "web_scraping_natura",
-                'driver': "ODBC+Driver+18+for+SQL+Server"} 
+                'database' : self.st_data_db,
+                'driver': self.st_driv_db} 
 
-        connection_string = ('mysql+pymysql://{username}:{password}@{server}:3306/{database}'
+        connection_string = ('{driver}://{username}:{password}@{server}:3306/{database}'
                                 .format(**params))
 
         if not connection_string:
             raise ValueError("La variable de entorno CONNECTION_STRING no está configurada.")
 
-        connection = create_engine("sqlite:///:memory:") if self.bo_test else create_engine(connection_string)
+        connection = (create_engine("sqlite:///:memory:") if self.bo_test else
+                      create_engine(connection_string))
 
         return connection
 
@@ -61,13 +64,11 @@ class Connection:
 
         Hace accesible la conexión a las funciones mediante una sesión de sessionmaker
         
-        Parameters:
-            - None - 
-
         Returns:
-            - *(tuple)* - Una tupla con dos elementos
-                - session - Sesión requerida para poder operar los datos dentro de la base de datos
-                - engine - Conexión a la base de datos en su estado primitivo
+            tuple (tuple): Una tupla con dos elementos.
+            - db_session (session): Sesión requerida para poder operar los datos dentro de la base
+                de datos.
+            - db_engine (engine): Conexión a la base de datos en su estado primitivo.
         """
         db_engine = self.get_connection()
         sesion = sessionmaker(bind = db_engine)

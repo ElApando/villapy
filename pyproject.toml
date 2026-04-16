@@ -1,12 +1,11 @@
 [project]
 name = "villapy"
-version = "1.0.5"
+version = "1.0.6"
 description = "Utilities for data engineering workflows"
 authors = [{name="Juan Villalpando"}]
 
 dependencies = [
     "pandas==3.0",
-    "SQLAlchemy==2.0",
     "python-dotenv==1.1",
     "numpy==2.4.1"
 ]
@@ -26,7 +25,12 @@ dev = [
 ]
 
 mysql = [
-    "PyMySQL==1.1"
+    "PyMySQL==1.1",
+    "SQLAlchemy==2.0"
+]
+
+hash = [
+    "bcrypt==5.0"
 ]
 
 sqlserver = [

@@ -13,7 +13,7 @@
 
 from pathlib import Path
 
-from villapy_lib.utils.functions import ManageFunctios
+from villapy_lib.utils.functions import ManageFunctions
 from villapy_lib.config.dynamic import config_base_path
 
 class TestMapper:
@@ -32,7 +32,7 @@ class TestMapper:
         config_base_path(tmp_path)
         logs_dir = tmp_path / "logs"
         logs_dir.mkdir(parents=True, exist_ok=True)
-        active = ManageFunctios()
+        active = ManageFunctions()
         result = active.retry_function(function=self.function_prove_1, st_site="prueba")
 
         assert result == "fail"
@@ -42,7 +42,7 @@ class TestMapper:
         config_base_path(tmp_path)
         logs_dir = tmp_path / "logs"
         logs_dir.mkdir(parents=True, exist_ok=True)
-        active = ManageFunctios()
+        active = ManageFunctions()
         result = active.retry_function(self.function_prove_2, "prueba")
 
         assert result == "OK"
@@ -52,7 +52,7 @@ class TestMapper:
         config_base_path(tmp_path)
         logs_dir = tmp_path / "logs"
         logs_dir.mkdir(parents=True, exist_ok=True)
-        active = ManageFunctios()
+        active = ManageFunctions()
         active.run_stage(st_name_process="prueba", fu_function=self.function_prove_2)
         captured = capsys.readouterr()
 

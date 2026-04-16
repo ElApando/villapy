@@ -115,7 +115,7 @@ class GoogleTools:
                 st_text = f"Archivo existente encontrado. Reemplazando id={file_id} ..."
                 print(st_text)
                 self._logs(st_text)
-                updated = service.files().update( fileId=file_id, media_body=media, # type: ignore
+                updated = self.service.files().update( fileId=file_id, media_body=media, # type: ignore
                           supportsAllDrives=True).execute()
                 st_text = f"Reemplazado: {file_name} (id: {updated.get('id')})" # type: ignore
                 print(st_text)
@@ -132,7 +132,7 @@ class GoogleTools:
                 st_text = "Archivo no existe. Creando nuevo archivo en la carpeta..."
                 print(st_text)
                 self._logs(st_text)
-                created = service.files().create(body=file_metadata, media_body=media, #type:ignore
+                created = self.service.files().create(body=file_metadata, media_body=media, #type:ignore
                                             fields="id, name", supportsAllDrives=True).execute()
                 st_text = f"Creado: {created.get('name')} (id: {created.get('id')})" #type:ignore
                 print(st_text)

@@ -27,9 +27,9 @@ class TestGoogleDrive:
             "id": "123"
         }
 
-        with patch("villapy.cloud.google.drive.Credentials"), \
-            patch("villapy.cloud.google.drive.build", return_value=fake_service), \
-            patch("villapy.cloud.google.drive.MediaFileUpload"):
+        with patch("villapy_lib.cloud.google.drive.Credentials"), \
+            patch("villapy_lib.cloud.google.drive.build", return_value=fake_service), \
+            patch("villapy_lib.cloud.google.drive.MediaFileUpload"):
 
             g = GoogleTools(di_scope={"scope": {"drive" : ["scope"]},
                                     "folder_id": {"prd": "token"}},
@@ -57,9 +57,9 @@ class TestGoogleDrive:
             "name": "test.csv"
         }
 
-        with patch("villapy.cloud.google.drive.Credentials"), \
-            patch("villapy.cloud.google.drive.build", return_value=fake_service), \
-            patch("villapy.cloud.google.drive.MediaFileUpload"):
+        with patch("villapy_lib.cloud.google.drive.Credentials"), \
+            patch("villapy_lib.cloud.google.drive.build", return_value=fake_service), \
+            patch("villapy_lib.cloud.google.drive.MediaFileUpload"):
 
             g = GoogleTools(di_scope={"scope": {"drive" : ["scope"]},
                                     "folder_id": {"prd": "token"}},

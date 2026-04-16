@@ -20,7 +20,7 @@ class TestMapper:
 
     def test_mapper_more(self, capsys):
         """ Prueba Uniataria Mapeador - Ruta valida """
-        active = Mapper(st_path = "villapy", st_env = "villa_env")
+        active = Mapper(st_path = "villapy_lib", st_env = "villa_env")
         active.execute()
 
         assert not "Ruta No Encontrada" in capsys.readouterr().out
