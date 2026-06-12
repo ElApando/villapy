@@ -99,7 +99,6 @@ class ManageFile:
         if not os.path.exists(pa_path):
             os.makedirs(pa_path, exist_ok=True)
 
-
     def _validate_path(self, pa_path:Path)->bool:
         """  _validate_path
 

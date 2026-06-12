@@ -5,6 +5,8 @@ El script contiene todo lo correspondiente a las cadenas de texto
 
 import re
 
+import string
+import secrets
 import unicodedata
 from typing import Dict
 
@@ -62,6 +64,21 @@ class TextManage:
                                string = st_file_name)
         return st_file_name
 
+    def caracters_clean_v2(self, st_file_name:str) -> str:
+        """ clean_caracters
+        
+        Limpia el nombre de carcteres etraños que puedan romper el nombre de la tabla,
+        sin numeros
+
+        Parameters:
+            st_file_name (str): Nombre con caracteres raros
+        Returns:
+            st_file_name (str): Nombre sin caracteres raros
+        """
+        st_file_name = re.sub(pattern='[<>:"/\\|?*´%!@$&()=¿-;_]', repl="",
+                               string = st_file_name)
+        return st_file_name
+
     def save_numbers(self, st_number:str)->str:
         """ Salvación de números
 
@@ -89,7 +106,7 @@ class TextManage:
         Parameters:
             st_data (str): Fecha con formato incierto
 
-        Return:
+        Returns:
             st_data (str): Fecha con el formato adecuado 
         """
         di_months = {"jan":"01", "ene":"01", "feb": "02", "mar": "03", "apr": "04", "abr":"04",
@@ -192,10 +209,55 @@ class TextManage:
 
         Se codifica la contraseña por seguridad
 
+        Parameters:
+            st_password (str): Contraseña que será codificada
         Return:
             hash (str): contraseña codificada 
         """
         st_hashed =bcrypt.hashpw(st_password.encode(), bcrypt.gensalt())
         return st_hashed.decode()
+
+    def create_passwords(self,in_how_pass: int = 1, in_how_long: int = 32)->str:
+        """ Creador de contraseñas
+
+        Crea la cantidad de contraseñas requeridas del tamño requerido, intercala letras, digitos
+        y simbolos 
+
+        Parameters:
+            in_how_pass (int): Cuantas contraseñas requieres, no acepta valores menores a 0 ó 0
+            in_how_long (int): Tamaño de la contraseña no acepta valores menores a 0 ó 0
+
+        Return:
+            st_save (str): Contraseña o contraseñas 
+        """
+
+        in_how_pass = 1 if in_how_pass <= 0 else in_how_pass
+        in_how_long = 32 if in_how_long <= 0 else in_how_long
+
+        st_options = string.ascii_letters+string.digits+"!#$-_+=.,"
+        st_save = ""
+
+        for _ in range(0, in_how_pass, 1):
+            st_password = "".join(secrets.choice(st_options) for _ in range(0, in_how_long, 1))
+            st_save = st_save + st_password + "\n"
+
+        return st_save
+
+    def format_bool(self, st_bool: str)-> bool | str: # Falta prueba unitaria 
+        """ Formato de booleanos
+
+        Da el formato adecuado al texto que se pretende tomar como booleano
+        para ello se debe verificar que el texto contenga true o false
+
+        Parameters:
+            st_bool (str): Texto que contiene un booleano
+        Returns:
+            bo_bool (bool): Booleano correcto
+        """
+
+        bo_bool = (True if st_bool.capitalize() == "True" else False 
+                   if st_bool.capitalize() == "False" else "NOT")
+
+        return bo_bool
 
 # Finite Incantatem

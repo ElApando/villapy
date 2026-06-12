@@ -23,7 +23,7 @@ from villapy_lib.database.connection import Connection
 class QuerysDB:
     """Clase peticiones a SQL con SQLAlchemy ORM"""
 
-    def __init__(self, di_connection:Dict[str, str], bo_test: bool = False)->None:
+    def __init__(self, di_connection:Dict[str, str | None], bo_test: bool = False)->None:
         """ Inicio de la clase
 
         Se hace la conexión con la base de datos, también la clase contiene diferentes peticiones 
