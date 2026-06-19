@@ -29,6 +29,7 @@ class ProjectCreate: # Falta prueba unitaria
             di_routes (Dict): Diccionario con el orden del proyecto"""
 
         self.cl_manager_file = ManageFile()
+        self.st_project = list(di_routes.keys())[0]
         self.di_routes: Dict[str, Any] = di_routes
         self.ls_routes: List[str] = self.check_dict_route(di_data=self.di_routes, in_depth=1)
 
@@ -38,7 +39,8 @@ class ProjectCreate: # Falta prueba unitaria
         1- Creación de rutas
         """
         for ii in self.ls_routes:
-            self.create_route(ii)
+            st_project_name = ii.replace(f"{self.st_project}/", "")
+            self.create_route(st_project_name)
 
     def check_dict_route(self, di_data: Dict[str, Any], st_save: str = "", 
                          ls_save: List[str] | None  = None, in_depth: int = 1)->List[str]:
