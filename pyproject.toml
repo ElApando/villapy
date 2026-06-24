@@ -5,7 +5,7 @@ description = "Utilities for data engineering workflows"
 authors = [{name="Juan Villalpando"}]
 
 dependencies = [
-    "pandas==3.0",
+    "pandas==3.0.0",
     "python-dotenv==1.1",
     "numpy==2.4.1"
 ]
